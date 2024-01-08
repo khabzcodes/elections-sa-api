@@ -11,11 +11,19 @@ datasource db {
   relationMode = "prisma"
 }
 
-model Result {
+model Results {
   id         Int    @id @default(autoincrement())
   party      String
   votes      Int
   percentage Float
   seats      Int
   year       Int
+}
+
+model Stats {
+  id                Int @id @default(autoincrement())
+  registered_voters Int
+  total_votes       Int
+  spoilt_votes      Int
+  year              Int
 }
