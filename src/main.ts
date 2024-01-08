@@ -11,11 +11,15 @@ async function bootstrap() {
     .setVersion('1.0')
     .build();
 
-  const document = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('api', app, document);
+  const swaggerCDN = 'https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.7.2';
 
-  app.use('/api-json', (req, res) => {
-    res.status(200).json(document);
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
+  SwaggerModule.setup('api', app, document, {
+    customCssUrl: [`${swaggerCDN}/swagger-ui.css`],
+    customJs: [
+      `${swaggerCDN}/swagger-ui-bundle.js`,
+      `${swaggerCDN}/swagger-ui-standalone-preset.js`,
+    ],
   });
 
   await app.listen(3000);
